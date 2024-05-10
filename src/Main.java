@@ -11,6 +11,10 @@ import javax.swing.JOptionPane;
 
 public class Main {
     private static boolean dark = false;
+    public Main(boolean dark){
+        this.dark=dark;
+    }
+
     public static void main(String[] args) {
         File sessionFile = new File("Session.txt");
         if (!sessionFile.exists()) {

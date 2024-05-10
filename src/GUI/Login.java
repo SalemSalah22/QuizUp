@@ -10,9 +10,10 @@ import java.io.IOException;
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 
+
 public class Login extends JFrame {
     //Declaration of all the components
-    JFrame frame = new JFrame("Login Page");
+    JFrame frame = new JFrame("Login");
     JPanel panel = new JPanel();
     JLabel loginLable = new JLabel("Login");
     JLabel userLable = new JLabel("Email or Username");
@@ -38,7 +39,6 @@ public class Login extends JFrame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setResizable(false);
-
         panel.setSize(405, 520);
         panel.setBackground(Color.white);
         panel.setLayout(null);
@@ -63,29 +63,34 @@ public class Login extends JFrame {
 
         showPass.setFont(new Font("Arial", Font.PLAIN, 12));
         showPass.setBounds(40, 250, 150, 35);
-        showPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        showPass.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         saveBox.setFont(new Font("Open Sans", Font.PLAIN, 15));
         saveBox.setBounds(40, 305, 150, 20);
 
         LoginButton.setFont(new Font("Open Sans", Font.BOLD, 16));
-        LoginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LoginButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         LoginButton.setBounds(40, 340, 310, 35);
         LoginButton.setBorder(BorderFactory.createEmptyBorder());
 
-        LoginMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LoginMessage.setHorizontalAlignment(SwingConstants.CENTER);
         LoginMessage.setFont(new Font("Open Sans", Font.PLAIN, 12));
         LoginMessage.setBounds(40, 460, 310, 20);
 
         RegLbl.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        RegLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        RegLbl.setHorizontalAlignment(SwingConstants.CENTER);
         RegLbl.setBounds(40, 385, 310, 20);
 
         RegisterButton.setFont(new Font("Open Sans", Font.BOLD, 16));
-        RegisterButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        RegisterButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         RegisterButton.setBounds(40, 415, 310, 35);
         RegisterButton.setBorder(BorderFactory.createEmptyBorder());
+        RegisterButton.setFont(new Font("Open Sans", Font.BOLD, 16));
+        RegisterButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        RegisterButton.setBorder(BorderFactory.createEmptyBorder());
 
+        ThemeCng.setBounds(320, 30, 40, 35);
+        ThemeCng.setCursor(new Cursor(Cursor.HAND_CURSOR));
         ThemeCng.setIcon(darkIcon);
 
         if(Dark){
@@ -126,11 +131,7 @@ public class Login extends JFrame {
             ThemeCng.setIcon(darkIcon
             );
         }
-        RegisterButton.setFont(new Font("Open Sans", Font.BOLD, 16));
-        RegisterButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        RegisterButton.setBorder(BorderFactory.createEmptyBorder());
-        ThemeCng.setBounds(325, 30, 40, 35);
-        ThemeCng.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
 
 
         //adding the components to the frame <3

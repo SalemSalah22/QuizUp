@@ -1,7 +1,4 @@
 package GUI;
-
-import com.sun.tools.javac.Main;
-
 import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import java.awt.*;
@@ -73,9 +70,11 @@ public class QuizList extends JFrame {
 
         logout.setBorder(new RoundedBorder());
         logout.setBounds(560,60,100,30);
+        logout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         Profile.setBorder(new RoundedBorder());
         Profile.setBounds(450,60,100,30);
+        Profile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         line.setBounds(30,120,640,1);
 
@@ -85,6 +84,7 @@ public class QuizList extends JFrame {
         Quiz1.setFont(new Font("segoe UI",Font.BOLD,14));
         Quiz1.setBorder(new RoundedBorder());
         Quiz1.setBounds(30,165,200,35);
+        Quiz1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         Science.setBounds(30,215,200,30);
         Science.setFont(new Font("segoe UI",Font.PLAIN,14));
@@ -92,6 +92,8 @@ public class QuizList extends JFrame {
         Quiz2.setFont(new Font("segoe UI",Font.BOLD,14));
         Quiz2.setBorder(new RoundedBorder());
         Quiz2.setBounds(30,250,200,35);
+        Quiz2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
 
         history.setBounds(30,300,200,30);
         history.setFont(new Font("segoe UI",Font.PLAIN,14));
@@ -99,6 +101,7 @@ public class QuizList extends JFrame {
         Quiz3.setFont(new Font("segoe UI",Font.BOLD,14));
         Quiz3.setBorder(new RoundedBorder());
         Quiz3.setBounds(30,335,200,35);
+        Quiz3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         h1.setBounds(250,130,300,35);
         h1.setFont(new Font("segoe UI",Font.PLAIN,14));
@@ -233,6 +236,10 @@ public class QuizList extends JFrame {
             Login loginFrame = new Login(Dark);
             loginFrame.pack();
             frame.dispose();
+        });
+
+        Profile.addActionListener(e -> {
+            Profile profile =new Profile(username,storedPassword,storedEmail,fname,lname,Dark);
         });
 
     }
