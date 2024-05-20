@@ -8,14 +8,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.*;
-import javax.swing.border.AbstractBorder;
 
 
 public class Login extends JFrame {
     //Declaration of all the components
     JFrame frame = new JFrame("Login");
     JPanel panel = new JPanel();
-    JLabel loginLable = new JLabel("Login");
+    JLabel loginLable = new JLabel("LOGIN");
     JLabel userLable = new JLabel("Email or Username");
     JLabel ThemeCng = new JLabel();
     JLabel RegLbl = new JLabel("Need an account ? Register.");
@@ -52,14 +51,14 @@ public class Login extends JFrame {
 
         usernameField.setFont(new Font("Open Sans", Font.PLAIN, 15));
         usernameField.setBounds(40, 130, 310, 35);
-        usernameField.setBorder(new RoundedBorder());
+        usernameField.setBorder(new Utils.RoundedBorder());
 
         password.setFont(new Font("Arial", Font.PLAIN, 15));
         password.setBounds(40, 185, 100, 30);
 
         PasswordField.setFont(new Font("Open Sans", Font.PLAIN, 15));
         PasswordField.setBounds(40, 220, 310, 35);
-        PasswordField.setBorder(new RoundedBorder());
+        PasswordField.setBorder(new Utils.RoundedBorder());
 
         showPass.setFont(new Font("Arial", Font.PLAIN, 12));
         showPass.setBounds(40, 250, 150, 35);
@@ -82,19 +81,15 @@ public class Login extends JFrame {
         RegLbl.setBounds(40, 385, 310, 20);
 
         RegisterButton.setFont(new Font("Open Sans", Font.BOLD, 16));
-        RegisterButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         RegisterButton.setBounds(40, 415, 310, 35);
         RegisterButton.setBorder(BorderFactory.createEmptyBorder());
-        RegisterButton.setFont(new Font("Open Sans", Font.BOLD, 16));
         RegisterButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        RegisterButton.setBorder(BorderFactory.createEmptyBorder());
 
         ThemeCng.setBounds(320, 30, 40, 35);
         ThemeCng.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        ThemeCng.setIcon(darkIcon);
 
+        // Colorful properties
         if(Dark){
-            // Colorful properties
             panel.setBackground(new Color(43, 45, 49, 255));
             loginLable.setForeground(new Color(255, 255, 255));
             userLable.setForeground(new Color(128, 132, 142));
@@ -128,8 +123,7 @@ public class Login extends JFrame {
             RegisterButton.setForeground(Color.WHITE);
             saveBox.setBackground(Color.white);
             saveBox.setForeground(new Color(102, 102, 102));
-            ThemeCng.setIcon(darkIcon
-            );
+            ThemeCng.setIcon(darkIcon);
         }
 
 
@@ -171,44 +165,10 @@ public class Login extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if (Dark) {
                     //light mood colors
-                    panel.setBackground(new Color(255, 255, 255));
-                    loginLable.setForeground(new Color(0, 168, 97));
-                    userLable.setForeground(new Color(102, 102, 102));
-                    usernameField.setForeground(new Color(102, 102, 102));
-                    usernameField.setBackground(new Color(255, 255, 255));
-                    password.setForeground(new Color(102, 102, 102));
-                    PasswordField.setForeground(new Color(102, 102, 102));
-                    PasswordField.setBackground(new Color(255, 255, 255));
-                    showPass.setForeground(new Color(102, 102, 102));
-                    LoginButton.setBackground(new Color(0, 168, 97));
-                    LoginButton.setForeground(new Color(255, 255, 255));
-                    RegLbl.setForeground(Color.WHITE);
-                    saveBox.setBackground(Color.white);
-                    saveBox.setForeground(new Color(102, 102, 102));
-                    ThemeCng.setIcon(darkIcon);
-                    Dark = false;
+                    setDark();
                 } else {
                     //dark mood colors
-                    panel.setBackground(new Color(43, 45, 49, 255));
-                    loginLable.setForeground(new Color(255, 255, 255));
-                    userLable.setForeground(new Color(128, 132, 142));
-                    usernameField.setForeground(new Color(255, 255, 255));
-                    usernameField.setBackground(new Color(51, 53, 56));
-                    password.setForeground(new Color(128, 132, 142));
-                    PasswordField.setForeground(new Color(255, 255, 255));
-                    PasswordField.setBackground(new Color(51, 53, 56));
-                    showPass.setForeground(new Color(128, 132, 142));
-                    LoginButton.setBackground(new Color(255, 255, 255));
-                    LoginButton.setForeground(new Color(30, 31, 34));
-                    LoginButton.setBorder(BorderFactory.createEmptyBorder());
-                    RegLbl.setForeground(new Color(204, 204, 204));
-                    RegisterButton.setBackground(new Color(166, 166, 166));
-                    RegisterButton.setForeground(new Color(255, 255, 255));
-                    RegisterButton.setBorder(BorderFactory.createEmptyBorder());
-                    saveBox.setBackground(new Color(43, 45, 49, 255));
-                    saveBox.setForeground(new Color(128, 132, 142));
-                    ThemeCng.setIcon(lightIcon);
-                    Dark = true;
+                    setLight();
                 }
 
             }
@@ -287,32 +247,57 @@ public class Login extends JFrame {
                 SignUpFrame.pack();
                 frame.dispose();
         });
+
+
+
+
+
+        //end of the constructor
     }
-    //end of the constructor
-    class RoundedBorder extends AbstractBorder {
-        @Override
-        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2d.setColor(Color.GRAY);
-            g2d.drawRoundRect(x, y, width - 1, height - 1, 10, 10);
-        }
 
-        @Override
-        public Insets getBorderInsets(Component c) {
-            return new Insets(5, 5, 5, 5);
-        }
-
-        @Override
-        public Insets getBorderInsets(Component c, Insets insets) {
-            insets.set(5, 5, 5, 5);
-            return insets;
-        }
-
-        @Override
-        public boolean isBorderOpaque() {
-            return true;
-        }
+    public void setDark(){
+        panel.setBackground(new Color(255, 255, 255));
+        loginLable.setForeground(new Color(0, 168, 97));
+        userLable.setForeground(new Color(102, 102, 102));
+        usernameField.setForeground(new Color(102, 102, 102));
+        usernameField.setBackground(new Color(255, 255, 255));
+        password.setForeground(new Color(102, 102, 102));
+        PasswordField.setForeground(new Color(102, 102, 102));
+        PasswordField.setBackground(new Color(255, 255, 255));
+        showPass.setForeground(new Color(102, 102, 102));
+        LoginButton.setBackground(new Color(0, 168, 97));
+        LoginButton.setForeground(new Color(255, 255, 255));
+        RegLbl.setForeground(Color.WHITE);
+        saveBox.setBackground(Color.white);
+        saveBox.setForeground(new Color(102, 102, 102));
+        ThemeCng.setIcon(darkIcon);
+        Dark = false;
     }
+
+    public void setLight(){
+        panel.setBackground(new Color(43, 45, 49, 255));
+        loginLable.setForeground(new Color(255, 255, 255));
+        userLable.setForeground(new Color(128, 132, 142));
+        usernameField.setForeground(new Color(255, 255, 255));
+        usernameField.setBackground(new Color(51, 53, 56));
+        password.setForeground(new Color(128, 132, 142));
+        PasswordField.setForeground(new Color(255, 255, 255));
+        PasswordField.setBackground(new Color(51, 53, 56));
+        showPass.setForeground(new Color(128, 132, 142));
+        LoginButton.setBackground(new Color(255, 255, 255));
+        LoginButton.setForeground(new Color(30, 31, 34));
+        LoginButton.setBorder(BorderFactory.createEmptyBorder());
+        RegLbl.setForeground(new Color(204, 204, 204));
+        RegisterButton.setBackground(new Color(166, 166, 166));
+        RegisterButton.setForeground(new Color(255, 255, 255));
+        RegisterButton.setBorder(BorderFactory.createEmptyBorder());
+        saveBox.setBackground(new Color(43, 45, 49, 255));
+        saveBox.setForeground(new Color(128, 132, 142));
+        ThemeCng.setIcon(lightIcon);
+        Dark = true;
+    }
+
+
+
 }
 

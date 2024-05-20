@@ -1,28 +1,32 @@
 package GUI;
+
+import Utils.RoundedBorder;
 import javax.swing.*;
-import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.*;
 
 public class Profile extends JFrame {
     // components of the Profile page
     JFrame frame =new JFrame("Profile");
     JPanel panel =new JPanel();
-    /*JLabel Name =new JLabel();*/       //<-------- try to set the Minimum size for this sorry
-    JLabel accLbl =new JLabel("Account");
-    JLabel AccDetails =new JLabel("Account Details");
 
+    JPanel topPanel=new JPanel();
+    JLabel Name =new JLabel();       //<-------- try to set the Minimum size for this sorry
+    JLabel accLbl =new JLabel("'s Account");
+
+    JLabel AccDetails =new JLabel("Account Details");
     JLabel userLbl =new JLabel("Username");
     JPanel usernamePanel =new JPanel();
     JLabel UserInfo=new JLabel("User here");
-    JLabel cngname=new JLabel("Change username ?");
+    JLabel cngname=new JLabel("Change username");
 
     JLabel passLbl =new JLabel("Password");
     JPanel passPanel =new JPanel();
     JLabel PassInfo =new JLabel();
-    JLabel cngpass=new JLabel("Change password ?");
-    JLabel showpass=new JLabel("Show password ?");
+    JLabel cngpass=new JLabel("Change password");
+    JLabel showpass=new JLabel("Show password");
 
     JLabel Emaillbl=new JLabel("Email address");
     JPanel emailPanel =new JPanel();
@@ -53,13 +57,13 @@ public class Profile extends JFrame {
     // variables declaration
     private String Username;
     private String showedpassword;
-    private String mail;
+    private String Email;
     private String fname;
     private String lname;
-    private boolean dark;
+    boolean dark;
     String maskedPassword="";
-    public Profile(String name,String Password,String mail,String fname,String lname,boolean Dark){
-        this.mail=mail;
+    public Profile(String name,String Password,String email,String fname,String lname,boolean Dark){
+        this.Email=email;
         this.Username=name;
         for (int i = 0; i < Password.length(); i++) {
             maskedPassword += "•";
@@ -71,28 +75,32 @@ public class Profile extends JFrame {
         FirstInfo.setText(fname);
         LastInfo.setText(lname);
         UserInfo.setText(Username);
-        EmailInfo.setText(mail);
+        EmailInfo.setText(Email);
         PassInfo.setText(maskedPassword);
 
 
         //non-Colorful properties
-        //Name.setText(Username);
+        Name.setText(Username);
         frame.setSize(690,910);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setResizable(false);
-        panel.setSize(690,910);
+
+        panel.setSize(650,910);
         panel.setLayout(null);
 
+        topPanel.setBounds(40,0,690,90);
+        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
 
-        /*
-        Name.setFont(new Font("Poppins", Font.BOLD, 32));
+
+        Name.setFont(new Font("Segoe UI", Font.BOLD, 40));
         Name.setForeground(new Color(0,168,97));
-        Name.setBounds(40, 50,200,35);
-        */
+        Name.setBounds(40, 30,200,35);
+
+
 
         accLbl.setFont(new Font("Segoe UI", Font.BOLD, 40));
-        accLbl.setBounds(40,30,190,35);
+        accLbl.setBounds(150,30,210,35);
 
         AccDetails.setFont(new Font("Segoe UI", Font.BOLD, 24));
         AccDetails.setBounds(40,115,190,35);
@@ -201,9 +209,11 @@ public class Profile extends JFrame {
         cancel.setBorder(new RoundedBorder());
         cancel.setFont(new Font("Segoe UI", Font.BOLD, 14));
 
+
         //applying the Color theme depending on the last window was
         if(dark){
             panel.setBackground(new Color(43, 45, 49));
+            topPanel.setBackground(new Color(43, 45, 49));
             accLbl.setForeground(new Color(255, 255, 255, 255));
             AccDetails.setForeground(new Color(255, 255, 255, 203));
             userLbl.setForeground(new Color(128, 132, 142));
@@ -212,7 +222,7 @@ public class Profile extends JFrame {
             cngname.setForeground(new Color(102,102,102));
             passLbl.setForeground(new Color(128, 132, 142));
             passPanel.setBackground(new Color(51, 53, 56));
-            PassInfo.setForeground(new Color(255,102,102));
+            PassInfo.setForeground(new Color(255, 255, 255));
             cngpass.setForeground(new Color(102,102,102));
             showpass.setForeground(new Color(102,102,102));
             Emaillbl.setForeground(new Color(128, 132, 142));
@@ -234,6 +244,7 @@ public class Profile extends JFrame {
             cancel.setForeground(Color.WHITE);
         }else if(!dark){
             panel.setBackground(new Color(251,251,251));
+            topPanel.setBackground(new Color(251,251,251));
             accLbl.setForeground(new Color(32, 32, 32));
             AccDetails.setForeground(new Color(70, 70, 70));
             userLbl.setForeground(new Color(102,102,102));
@@ -242,7 +253,7 @@ public class Profile extends JFrame {
             cngname.setForeground(new Color(102,102,102));
             passLbl.setForeground(new Color(102,102,102));
             passPanel.setBackground(Color.WHITE);
-            PassInfo.setForeground(new Color(255,102,102));
+            PassInfo.setForeground(new Color(0, 168, 97));
             cngpass.setForeground(new Color(102,102,102));
             showpass.setForeground(new Color(102,102,102));
             Emaillbl.setForeground(new Color(102,102,102));
@@ -271,8 +282,9 @@ public class Profile extends JFrame {
 
 
         frame.add(panel);
-        //panel.add(Name);
-        panel.add(accLbl);
+        panel.add(topPanel);
+        topPanel.add(Name);
+        topPanel.add(accLbl);
         panel.add(AccDetails);
         panel.add(userLbl);
         panel.add(usernamePanel);
@@ -318,42 +330,79 @@ public class Profile extends JFrame {
             }
         });
 
+        cancel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                frame.dispose();
+                new QuizList(Username, showedpassword, Email, fname, lname,dark);
+            }
+        });
+
+        Del.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try (BufferedReader br = new BufferedReader(new FileReader("Users.txt"));
+                     FileWriter fw = new FileWriter("temp.txt")) {
+                    String line;
+                    while ((line = br.readLine())!= null) {
+                        String[] parts = line.split("\\s+");
+                        if (parts.length >= 5) {
+                            String username = parts[0].trim();
+                            String storedEmail = parts[1].trim();
+                            if (!(Email.equals(storedEmail) && Username.equals(username))) {
+                                fw.write(line);
+                                fw.write(System.lineSeparator());
+                            }
+                        }
+                    }
+                    // Close the streams
+                    br.close();
+                    fw.close();
+
+                    // Delete the original file
+                    File originalFile = new File("Users.txt");
+                    originalFile.delete();
+
+                    // Rename the temp file to the original file
+                    File tempFile = new File("temp.txt");
+                    tempFile.renameTo(originalFile);
+
+                    File sessionFile = new File("Session.txt");
+                    if (sessionFile.exists()) {
+                        sessionFile.delete();
+                        System.out.println();
+                        System.out.println("Your Account has been Deleted successfully!");
+                        System.out.println("Session Deleted!");
+                        System.out.println();
+                    }
+                    // Create and display the Login after the deleting completed
+                    frame.dispose(); // Close the current frame
+                    Login loginFrame = new Login(dark);
+                    loginFrame.pack();
+                } catch (IOException ex) {
+                    System.err.println("Failed to read from or write to the file.");
+                }
+                }
+        });
+
+        cngpass.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new ResetPass(showedpassword,Email,dark);
+            }
+        });
+
+        cngname.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new ResetName(Username,showedpassword,Email,dark);
+            }
+        });
+
+
+
     }
 
-
-
-
-
-
-
-
-
-
-    class RoundedBorder extends AbstractBorder {
-        @Override
-        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2d.setColor(new Color(204,204,204));
-            g2d.drawRoundRect(x, y, width - 1, height - 1, 10, 10);
-        }
-
-        @Override
-        public Insets getBorderInsets(Component c) {
-            return new Insets(5, 5, 5, 5);
-        }
-
-        @Override
-        public Insets getBorderInsets(Component c, Insets insets) {
-            insets.set(5, 5, 5, 5);
-            return insets;
-        }
-
-        @Override
-        public boolean isBorderOpaque() {
-            return false;
-        }
-    }
 }
 
 
